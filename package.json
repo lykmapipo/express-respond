@@ -1,0 +1,46 @@
+{
+    "name": "express-respond",
+    "version": "0.1.0",
+    "description": "HTTP responses middleware for expressjs",
+    "main": "index.js",
+    "scripts": {
+        "test": "grunt test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lykmapipo/express-respond.git"
+    },
+    "keywords": [
+        "middleware",
+        "express",
+        "expressjs",
+        "http",
+        "status",
+        "code",
+        "responses",
+        "friendly"
+    ],
+    "author": {
+        "name": "lykmapipo",
+        "email": "lallyelias87@gmail.com",
+        "url": "https://github.com/lykmapipo"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/lykmapipo/express-respond/issues"
+    },
+    "homepage": "https://github.com/lykmapipo/express-respond",
+    "contributors": [{
+        "name": "lykmapipo",
+        "github": "https://github.com/lykmapipo"
+    }],
+    "devDependencies": {
+        "chai": "^2.0.0",
+        "faker": "^2.1.2",
+        "grunt": "^0.4.5",
+        "grunt-contrib-jshint": "^0.11.1",
+        "grunt-mocha-test": "^0.12.7",
+        "jshint-stylish": "^1.0.1",
+        "mocha": "^2.1.0",
+    }
+}
