@@ -2,15 +2,13 @@
 
 //dependencies
 var path = require('path');
-var ejs = require('ejs');
-var faker = require('faker');
 var expect = require('chai').expect;
 var Request = require('mock-express-request');
 var Response = require('mock-express-response');
 
-describe('respond 2xx', function() {
+describe('respond 5xx', function() {
 
-    it('should have common 2xx response methods', function(done) {
+    it('should have common 5xx response methods', function(done) {
         var request = new Request({
             headers: {
                 'Accept': 'application/json'
@@ -26,18 +24,18 @@ describe('respond 2xx', function() {
 
         respond(request, response, function() {
 
-            expect(response.ok).to.be.a('function');
-            expect(response.created).to.be.a('function');
-            expect(response.accepted).to.be.a('function');
-            expect(response.noContent).to.be.a('function');
+            expect(response.internalServerError).to.be.a('function');
+            expect(response.notImplemented).to.be.a('function');
+            expect(response.badGateway).to.be.a('function');
+            expect(response.serviceUnavailable).to.be.a('function');
 
             done();
         });
     });
 
-    it('should be able to response with 201 `created`', function(done) {
+    it('should be able to response with 500 `intenal server error`', function(done) {
 
-        var data = faker.helpers.contextualCard();
+        var error = new Error('Internal Server Error');
 
         var request = new Request({
             headers: {
@@ -49,15 +47,13 @@ describe('respond 2xx', function() {
             request: request,
             finish: function() {
 
-                expect(response.statusCode).to.be.equal(201);
+                expect(response.statusCode).to.be.equal(500);
 
-                expect(response.statusMessage).to.be.equal('Created');
+                expect(response.statusMessage).to.be.equal('Internal Server Error');
 
                 expect(response.get('content-type'))
                     .to.be.equal('application/json; charset=utf-8');
 
-                expect(response._getJSON().name).to.equal(data.name);
-
                 done();
             }
         });
@@ -65,16 +61,16 @@ describe('respond 2xx', function() {
         var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
-            //invoke created
-            response.created(data);
+            //invoke internalServerError
+            response.internalServerError(error);
 
         });
 
     });
 
-    it('should be able to response with 200 `ok`', function(done) {
+    it('should be able to response with 501 `not implemented error`', function(done) {
 
-        var data = faker.helpers.contextualCard();
+        var error = new Error('Not Implemented');
 
         var request = new Request({
             headers: {
@@ -86,15 +82,13 @@ describe('respond 2xx', function() {
             request: request,
             finish: function() {
 
-                expect(response.statusCode).to.be.equal(200);
+                expect(response.statusCode).to.be.equal(501);
 
-                expect(response.statusMessage).to.be.equal('OK');
+                expect(response.statusMessage).to.be.equal('Not Implemented');
 
                 expect(response.get('content-type'))
                     .to.be.equal('application/json; charset=utf-8');
 
-                expect(response._getJSON().name).to.equal(data.name);
-
                 done();
             }
         });
@@ -102,53 +96,16 @@ describe('respond 2xx', function() {
         var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
-            //invoke created
-            response.ok(data);
+            //invoke notImplemented
+            response.notImplemented(error);
 
         });
 
     });
 
-    it('should be able to response with 200 `ok` html', function(done) {
+    it('should be able to response with 502 `bad gateway error`', function(done) {
 
-        var request = new Request({
-            headers: {
-                'Accept': 'text/html'
-            }
-        });
-
-        var response = new Response({
-            request: request,
-            render: ejs.renderFile,
-            finish: function() {
-
-                expect(response.statusCode).to.be.equal(200);
-
-                expect(response.statusMessage).to.be.equal('OK');
-
-                expect(response.get('content-type'))
-                    .to.be.equal('text/html; charset=utf-8');
-
-                expect(response._getString()).to.be.equal('<p>Hello Mock</p>');
-
-
-                done();
-            }
-        });
-
-        var respond = require(path.join(__dirname, '..', '..'))();
-
-        respond(request, response, function() {
-            //invoke created
-            response.ok(path.join(__dirname, 'template.ejs'), {
-                name: 'Mock'
-            });
-
-        });
-
-    });
-
-    it('should be able to response with 204 `No Content`', function(done) {
+        var error = new Error('Bad Gateway');
 
         var request = new Request({
             headers: {
@@ -160,9 +117,12 @@ describe('respond 2xx', function() {
             request: request,
             finish: function() {
 
-                expect(response.statusCode).to.be.equal(204);
+                expect(response.statusCode).to.be.equal(502);
 
-                expect(response.statusMessage).to.be.equal('No Content');
+                expect(response.statusMessage).to.be.equal('Bad Gateway');
+
+                expect(response.get('content-type'))
+                    .to.be.equal('application/json; charset=utf-8');
 
                 done();
             }
@@ -171,8 +131,43 @@ describe('respond 2xx', function() {
         var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
-            //invoke created
-            response.noContent();
+            //invoke badGateway
+            response.badGateway(error);
+
+        });
+
+    });
+
+    it('should be able to response with 503 `service unavailable error`', function(done) {
+
+        var error = new Error('Service Unavailable');
+
+        var request = new Request({
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        var response = new Response({
+            request: request,
+            finish: function() {
+
+                expect(response.statusCode).to.be.equal(503);
+
+                expect(response.statusMessage).to.be.equal('Service Unavailable');
+
+                expect(response.get('content-type'))
+                    .to.be.equal('application/json; charset=utf-8');
+
+                done();
+            }
+        });
+
+        var respond = require(path.join(__dirname, '..', '..'))();
+
+        respond(request, response, function() {
+            //invoke serviceUnavailable
+            response.serviceUnavailable(error);
 
         });
 
