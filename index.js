@@ -6,6 +6,7 @@ var _ = require('lodash');
 var negotiate = require(path.join(__dirname, 'lib', 'negotiate'));
 var _2xx = require(path.join(__dirname, 'lib', 'responses', '2xx'));
 var _3xx = require(path.join(__dirname, 'lib', 'responses', '3xx'));
+var _4xx = require(path.join(__dirname, 'lib', 'responses', '4xx'));
 var _5xx = require(path.join(__dirname, 'lib', 'responses', '5xx'));
 
 /**
@@ -49,6 +50,9 @@ module.exports = function(options) {
 
         //extend response with 3xx responses
         _3xx(response);
+
+        //extend response with 4xx responses
+        _4xx(response);
 
         //extend response with 5xx responses
         _5xx(response);
