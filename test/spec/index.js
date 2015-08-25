@@ -26,6 +26,7 @@ describe('respond', function() {
 
             expect(request._respond.defaultType).to.equal('json');
             expect(request._respond.environment).to.equal('development');
+            expect(request._respond.negotiate).to.be.a('function');
             expect(request._respond.types).to.eql(['json', 'html', 'text']);
 
             done();
@@ -54,6 +55,7 @@ describe('respond', function() {
 
             expect(request._respond.defaultType).to.equal('html');
             expect(request._respond.environment).to.equal('production');
+            expect(request._respond.negotiate).to.be.a('function');
             expect(request._respond.types).to.eql(['json', 'html']);
 
             done();

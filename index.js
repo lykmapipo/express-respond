@@ -1,7 +1,10 @@
 'use strict';
 
 //dependencies
+var path = require('path');
 var _ = require('lodash');
+var negotiate = require(path.join(__dirname, 'lib', 'negotiate'));
+var success = require(path.join(__dirname, 'lib', 'responses', 'success'));
 
 /**
  * @function
@@ -28,6 +31,9 @@ module.exports = function(options) {
     //cross check default type
     options.defaultType = options.defaultType || 'json';
 
+    //add negotiate to options
+    options.negotiate = negotiate;
+
     function respond(request, response, next) {
         //cross check current application environment
         options.environment = options.environment ||
@@ -35,6 +41,9 @@ module.exports = function(options) {
 
         //extend request with respond options
         request._respond = options;
+
+        //extend response with 2xx responses
+        success(response);
 
         //we are done continue with middleware chain
         next();
