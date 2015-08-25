@@ -32,9 +32,9 @@ describe('response content negotiation', function() {
             }
         });
 
-        var negotiate = require(path.join(__dirname, '..', 'lib', 'negotiate'));
+        var negotiate = require(path.join(__dirname, '..', '..', 'lib', 'negotiate'));
 
-        var respond = require(path.join(__dirname, '..'))();
+        var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
 
@@ -75,9 +75,9 @@ describe('response content negotiation', function() {
             }
         });
 
-        var negotiate = require(path.join(__dirname, '..', 'lib', 'negotiate'));
+        var negotiate = require(path.join(__dirname, '..', '..', 'lib', 'negotiate'));
 
-        var respond = require(path.join(__dirname, '..'))();
+        var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
 
@@ -119,9 +119,9 @@ describe('response content negotiation', function() {
             }
         });
 
-        var negotiate = require(path.join(__dirname, '..', 'lib', 'negotiate'));
+        var negotiate = require(path.join(__dirname, '..', '..', 'lib', 'negotiate'));
 
-        var respond = require(path.join(__dirname, '..'))();
+        var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
 
@@ -173,9 +173,9 @@ describe('response content negotiation', function() {
             }
         });
 
-        var negotiate = require(path.join(__dirname, '..', 'lib', 'negotiate'));
+        var negotiate = require(path.join(__dirname, '..', '..', 'lib', 'negotiate'));
 
-        var respond = require(path.join(__dirname, '..'))();
+        var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
 
@@ -219,9 +219,9 @@ describe('response content negotiation', function() {
             }
         });
 
-        var negotiate = require(path.join(__dirname, '..', 'lib', 'negotiate'));
+        var negotiate = require(path.join(__dirname, '..', '..', 'lib', 'negotiate'));
 
-        var respond = require(path.join(__dirname, '..'))({
+        var respond = require(path.join(__dirname, '..', '..'))({
             types: ['xml', 'json']
         });
 

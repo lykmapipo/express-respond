@@ -20,7 +20,7 @@ describe('respond', function() {
             finish: function() {}
         });
 
-        var respond = require(path.join(__dirname, '..'))();
+        var respond = require(path.join(__dirname, '..', '..'))();
 
         respond(request, response, function() {
 
@@ -44,7 +44,7 @@ describe('respond', function() {
             finish: function() {}
         });
 
-        var respond = require(path.join(__dirname, '..'))({
+        var respond = require(path.join(__dirname, '..', '..'))({
             defaultType: 'html',
             environment: 'production',
             types: ['json', 'html']
