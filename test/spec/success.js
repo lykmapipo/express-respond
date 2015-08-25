@@ -2,6 +2,7 @@
 
 //dependencies
 var path = require('path');
+var ejs = require('ejs');
 var faker = require('faker');
 var expect = require('chai').expect;
 var Request = require('mock-express-request');
@@ -102,6 +103,45 @@ describe('respond success', function() {
         respond(request, response, function() {
             //invoke created
             response.ok(data);
+
+        });
+
+    });
+
+    it('should be able to response with 200 `ok` html', function(done) {
+
+        var request = new Request({
+            headers: {
+                'Accept': 'text/html'
+            }
+        });
+
+        var response = new Response({
+            request: request,
+            render: ejs.renderFile,
+            finish: function() {
+
+                expect(response.statusCode).to.be.equal(200);
+
+                expect(response.statusMessage).to.be.equal('OK');
+
+                expect(response.get('content-type'))
+                    .to.be.equal('text/html; charset=utf-8');
+
+                expect(response._getString()).to.be.equal('<p>Hello Mock</p>');
+
+
+                done();
+            }
+        });
+
+        var respond = require(path.join(__dirname, '..', '..'))();
+
+        respond(request, response, function() {
+            //invoke created
+            response.ok(path.join(__dirname, 'template.ejs'), {
+                name: 'Mock'
+            });
 
         });
 
