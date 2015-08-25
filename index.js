@@ -4,7 +4,7 @@
 var path = require('path');
 var _ = require('lodash');
 var negotiate = require(path.join(__dirname, 'lib', 'negotiate'));
-var success = require(path.join(__dirname, 'lib', 'responses', 'success'));
+var _2xx = require(path.join(__dirname, 'lib', 'responses', '2xx'));
 
 /**
  * @function
@@ -43,7 +43,7 @@ module.exports = function(options) {
         request._respond = options;
 
         //extend response with 2xx responses
-        success(response);
+        _2xx(response);
 
         //we are done continue with middleware chain
         next();
