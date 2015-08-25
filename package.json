@@ -48,7 +48,6 @@
         "mock-express-response": "^0.1.1"
     },
     "dependencies": {
-        "accepts": "^1.2.12",
         "http-status-codes": "^1.0.5",
         "lodash": "^3.10.1"
     }

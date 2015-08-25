@@ -4,6 +4,7 @@
 var _ = require('lodash');
 
 /**
+ * @function
  * @description common HTTP responses for expressjs
  * @param  {Object} options - valid internal configuration for express-respond
  * @param {String} options.environment - current application environment. Default 
@@ -14,6 +15,7 @@ var _ = require('lodash');
  * @param {Array.<String>} options.defaultType - default accepted response content
  *                                             type default to `json`
  * @return {Function} - a valid expressjs middleware
+ * @public
  */
 module.exports = function(options) {
     //cross check options
