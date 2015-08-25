@@ -23,6 +23,10 @@ describe('response content negotiation', function() {
         var response = new Response({
             request: request,
             finish: function() {
+                
+                expect(response.get('content-type'))
+                    .to.be.equal('application/json; charset=utf-8');
+
                 expect(response._getJSON().name).to.equal(data.name);
                 done();
             }
@@ -61,7 +65,7 @@ describe('response content negotiation', function() {
             render: ejs.renderFile,
             request: request,
             finish: function() {
-
+                
                 expect(response.get('content-type'))
                     .to.be.equal('text/html; charset=utf-8');
 
