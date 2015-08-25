@@ -6,7 +6,7 @@ var expect = require('chai').expect;
 var Request = require('mock-express-request');
 var Response = require('mock-express-response');
 
-describe('Express Respond', function() {
+describe('respond', function() {
 
     it('should be able to set default respond options', function(done) {
         var request = new Request({
