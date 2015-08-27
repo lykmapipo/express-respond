@@ -17,6 +17,32 @@ var respond = require('express-respond')
 app.use(respond())
 ```
 
+## Available response methods
+
+### 2xx methods
+- `ok(<view_name>, data, fn)`
+- `created(<view_name>, data, fn)`
+- `accepted(<view_name>, data, fn)`
+- `noContent(<view_name>, data, fn)`
+
+### 3xx methods
+- `notModified(<view_name>, data, fn)`
+
+### 4xx methods
+- `badRequest(<view_name>, data, fn)`
+- `unauthorized(<view_name>, data, fn)`
+- `paymentRequired(<view_name>, data, fn)`
+- `forbidden(<view_name>, data, fn)`
+- `notFound(<view_name>, data, fn)`
+- `methodNotAllowed(<view_name>, data, fn)`
+- `conflict(<view_name>, data, fn)`
+
+### 5xx methods
+- `internalServerError(<view_name>, data, fn)`
+- `notImplemented(<view_name>, data, fn)`
+- `badGateway(<view_name>, data, fn)`
+- `serviceUnavailable(<view_name>, data, fn)`
+
 
 ## Testing
 
