@@ -17,7 +17,8 @@ var _5xx = require(path.join(__dirname, 'lib', 'responses', '5xx'));
  *                                     to `app.get('env')` of express application
  * @param {Array.<String>} options.types - accepted response content types in the 
  *                                       order of their significant. Valid types 
- *                                       are `json`, `html` and `text`
+ *                                       are `json`, `html` and `text`. Default to
+ *                                       `json`, `html` and `text`
  * @param {Array.<String>} options.defaultType - default accepted response content
  *                                             type default to `json`
  * @return {Function} - a valid expressjs middleware

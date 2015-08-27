@@ -17,6 +17,10 @@
         "http",
         "status",
         "code",
+        "method",
+        "content",
+        "negotiation",
+        "negotiate",
         "responses",
         "respond",
         "friendly"
