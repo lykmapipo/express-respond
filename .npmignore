@@ -1,5 +1,3 @@
-api
-config
 node_modules
 ssl
 .DS_STORE
@@ -17,6 +15,5 @@ test
 *.log
 .jshintrc
 .editorconfig
-doc.html
 .travis.yml
 Gruntfile.js

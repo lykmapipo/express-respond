@@ -3,7 +3,7 @@ express-respond
 
 [![Build Status](https://travis-ci.org/lykmapipo/express-respond.svg?branch=master)](https://travis-ci.org/lykmapipo/express-respond)
 
-HTTP responses middleware for [expressjs](https://github.com/strongloop/express/)
+HTTP response methods with auto content negotiation for [expressjs](https://github.com/strongloop/express/)
 
 ## Installation
 ```sh
@@ -18,30 +18,35 @@ app.use(respond())
 ```
 
 ## Available response methods
+All response methods accept the following `optional` parameters
+
+- `view` an optional view name to use when render html response
+- `data` optional response data based on response type, as some of response are not must to have response body
+- `fn` an optional callback to invoke if rendering a view result to an error. [see expressjs render](http://expressjs.com/4x/api.html#res.render)
 
 ### 2xx methods
-- `ok(<view_name>, data, fn)`
-- `created(<view_name>, data, fn)`
-- `accepted(<view_name>, data, fn)`
-- `noContent(<view_name>, data, fn)`
+- `ok(<view>, data, fn)`
+- `created(<view>, data, fn)`
+- `accepted(<view>, data, fn)`
+- `noContent(<view>, data, fn)`
 
 ### 3xx methods
-- `notModified(<view_name>, data, fn)`
+- `notModified(<view>, data, fn)`
 
 ### 4xx methods
-- `badRequest(<view_name>, data, fn)`
-- `unauthorized(<view_name>, data, fn)`
-- `paymentRequired(<view_name>, data, fn)`
-- `forbidden(<view_name>, data, fn)`
-- `notFound(<view_name>, data, fn)`
-- `methodNotAllowed(<view_name>, data, fn)`
-- `conflict(<view_name>, data, fn)`
+- `badRequest(<view>, data, fn)`
+- `unauthorized(<view>, data, fn)`
+- `paymentRequired(<view>, data, fn)`
+- `forbidden(<view>, data, fn)`
+- `notFound(<view>, data, fn)`
+- `methodNotAllowed(<view>, data, fn)`
+- `conflict(<view>, data, fn)`
 
 ### 5xx methods
-- `internalServerError(<view_name>, data, fn)`
-- `notImplemented(<view_name>, data, fn)`
-- `badGateway(<view_name>, data, fn)`
-- `serviceUnavailable(<view_name>, data, fn)`
+- `internalServerError(<view>, data, fn)`
+- `notImplemented(<view>, data, fn)`
+- `badGateway(<view>, data, fn)`
+- `serviceUnavailable(<view>, data, fn)`
 
 
 ## Testing

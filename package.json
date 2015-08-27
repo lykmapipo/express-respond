@@ -1,7 +1,7 @@
 {
     "name": "express-respond",
     "version": "0.1.0",
-    "description": "HTTP responses middleware for expressjs",
+    "description": "HTTP response methods with auto content negotiation for expressjs",
     "main": "index.js",
     "scripts": {
         "test": "grunt test"
