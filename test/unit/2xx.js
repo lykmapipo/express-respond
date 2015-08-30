@@ -177,4 +177,45 @@ describe('respond 2xx', function() {
         });
 
     });
+
+
+    it('should be able to negotiate json response type even if `view` is provided', function(done) {
+
+        var data = faker.helpers.contextualCard();
+
+        var request = new Request({
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        var response = new Response({
+            render: ejs.renderFile,
+            request: request,
+            finish: function() {
+
+                expect(response.get('content-type'))
+                    .to.be.equal('application/json; charset=utf-8');
+
+                expect(response._getJSON().name).to.be.equal(data.name);
+
+                done();
+            }
+        });
+
+        var respond = require(path.join(__dirname, '..', '..'))();
+
+        respond(request, response, function() {
+
+            expect(request._respond.defaultType).to.equal('json');
+            expect(request._respond.environment).to.equal('development');
+            expect(request._respond.types).to.eql(['json', 'html', 'text']);
+
+            //invoke negotiated
+            response.ok(path.join(__dirname, 'template.ejs'), data);
+
+        });
+
+    });
+
 });
