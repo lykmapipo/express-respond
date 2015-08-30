@@ -367,4 +367,32 @@ describe('respond express integration', function() {
 
     });
 
+    describe('content negotiation', function() {
+        it('should be able to negotiate json response type even if `view` is provided', function(done) {
+
+            var error = new Error('Not Found');
+
+            app.get('/negotiate', function(request, response) {
+
+                assertRespond(request, response);
+
+                response.internalServerError(path.join(__dirname, 'template.ejs'), error);
+
+            });
+
+            request(app)
+                .get('/negotiate')
+                .set('Accept', 'application/json')
+                .expect(500)
+                .end(function(error, response) {
+
+                    expect(response.headers['content-type'])
+                        .to.equal('application/json; charset=utf-8');
+
+                    done(error, response);
+                });
+
+        });
+    });
+
 });
