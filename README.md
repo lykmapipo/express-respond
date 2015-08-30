@@ -18,7 +18,7 @@ var respond = require('express-respond')
 app.use(respond());
 
 //or use with custom options
-app.user(respond({
+app.use(respond({
             defaultType: 'html',
             environment: 'production',
             types: ['json', 'html']
