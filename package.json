@@ -1,6 +1,6 @@
 {
     "name": "express-respond",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "HTTP response methods with auto content negotiation for expressjs",
     "main": "index.js",
     "scripts": {
@@ -44,16 +44,16 @@
         "ejs": "^2.3.3",
         "express": "^4.13.3",
         "faker": "^3.0.1",
-        "grunt": "^0.4.5",
-        "grunt-contrib-jshint": "^0.11.2",
-        "grunt-mocha-test": "^0.12.7",
+        "grunt": "^1.0.1",
+        "grunt-contrib-jshint": "^1.1.0",
+        "grunt-mocha-test": "^0.13.2",
         "jshint-stylish": "^2.0.1",
-        "mocha": "^2.2.5",
-        "mock-express-request": "^0.1.1",
-        "mock-express-response": "^0.1.1",
-        "supertest": "^1.1.0"
+        "mocha": "^3.2.0",
+        "mock-express-request": "^0.2.0",
+        "mock-express-response": "^0.2.0",
+        "supertest": "^2.0.1"
     },
     "dependencies": {
-        "lodash": "^3.10.1"
+        "lodash": "^4.17.4"
     }
 }
