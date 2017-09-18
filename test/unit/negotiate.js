@@ -10,7 +10,7 @@ var Response = require('mock-express-response');
 
 describe('response content negotiation', function() {
 
-    it('should be able to negotiate with default response type', function(done) {
+    it('should be able to negotiate with json response type', function(done) {
 
         var data = faker.helpers.contextualCard();
 

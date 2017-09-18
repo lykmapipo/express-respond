@@ -1,13 +1,13 @@
 'use strict';
 
 //dependencies
-var path = require('path');
-var _ = require('lodash');
-var negotiate = require(path.join(__dirname, 'lib', 'negotiate'));
-var _2xx = require(path.join(__dirname, 'lib', 'responses', '2xx'));
-var _3xx = require(path.join(__dirname, 'lib', 'responses', '3xx'));
-var _4xx = require(path.join(__dirname, 'lib', 'responses', '4xx'));
-var _5xx = require(path.join(__dirname, 'lib', 'responses', '5xx'));
+const path = require('path');
+const _ = require('lodash');
+const negotiate = require(path.join(__dirname, 'lib', 'negotiate'));
+const _2xx = require(path.join(__dirname, 'lib', 'responses', '2xx'));
+const _3xx = require(path.join(__dirname, 'lib', 'responses', '3xx'));
+const _4xx = require(path.join(__dirname, 'lib', 'responses', '4xx'));
+const _5xx = require(path.join(__dirname, 'lib', 'responses', '5xx'));
 
 /**
  * @function
@@ -29,7 +29,7 @@ module.exports = function(options) {
     options = options || {};
 
     //cross check accepted types
-    var hasTypes = _.isArray(options.types) && _.size(options.types) > 0;
+    const hasTypes = _.isArray(options.types) && _.size(options.types) > 0;
     options.types = hasTypes ? options.types : ['json', 'html', 'text'];
 
     //cross check default type
