@@ -37,8 +37,8 @@ response.ok('foo bar');
 ## Options
 `express-respond` accept the following options
 
-- `defautType:String` current application environment. Default to `app.get('env')` of express application 
-- `environment:String` accepted response content types in the order of their significant. Valid types  are `json`, `html` and `text`. Default to `json`, `html` and `text`
+- `defaultType:String` accepted response content types in the order of their significant. Valid types  are `json`, `html` and `text`. Default to `json`, `html` and `text`
+- `environment:String` current application environment. Default to `app.get('env')` of express application
 - `types:[String]` default accepted response content type default to `json`
 
 ## Available response methods
