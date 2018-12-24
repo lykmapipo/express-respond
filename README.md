@@ -5,6 +5,8 @@ express-respond
 
 HTTP response methods with auto content negotiation for [expressjs](https://github.com/strongloop/express/)
 
+*Note: v1.0.0 only support json response*
+
 ## Installation
 ```sh
 $ npm install --save express-respond
@@ -12,234 +14,154 @@ $ npm install --save express-respond
 
 ## Usage
 ```js
-var respond = require('express-respond')
- 
-//use with default options
-app.use(respond());
+const express = require('express');
+const respond = require('express-respond');
 
-//or use with custom options
-app.use(respond({
-            defaultType: 'html',
-            environment: 'production',
-            types: ['json', 'html']
-        }));
+const app = express();
+app.use(respond);
 
-//json or jsonp response
-response.ok(data);
-
-//view response
-response.ok('users',data);
-
-//text response
-response.ok('foo bar');
+app.get('/', (request, response) => {
+  response.ok({ name: 'lykmapipo' });
+});
 ```
 
-## Options
-`express-respond` accept the following options
-
-- `defaultType:String` accepted response content types in the order of their significant. Valid types  are `json`, `html` and `text`. Default to `json`, `html` and `text`
-- `environment:String` current application environment. Default to `app.get('env')` of express application
-- `types:[String]` default accepted response content type default to `json`
-
-## Available response methods
-All response methods accept the following `optional` parameters
-
-- `view` an optional view name to use when render html response
-- `data` optional response data based on response type, as some of response are not must to have response body
-- `fn` an optional callback to invoke if rendering a view result to an error. [see expressjs render](http://expressjs.com/4x/api.html#res.render)
+## API
+All response methods accept optional response `body` based on response type, as some of response are not must to have response body.
 
 ### 2xx methods
 
-#### `ok(<view>, data, fn)`
+#### `ok(body: Any)`
+Send JSON response with `200 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.ok(data);
-
-//view response
-response.ok('users',data);
-
-//text response
-response.ok('foo bar');
+response.ok(body);
 ```
 
-#### `created(<view>, data, fn)`
+#### `created(body: Any)`
+Send JSON response with `201 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.created(data);
-
-//view response
-response.created('users',data);
-
-//text response
-response.created('foo bar');
+response.created(body);
 ```
 
-#### `accepted(<view>, data, fn)`
+#### `accepted([body: Any])`
+Send JSON response with `202 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.accepted(data);
-
-//view response
-response.accepted('users',data);
-
-//text response
-response.accepted('foo bar');
+response.accepted(body);
 ```
 
 ### `noContent()`
+Send JSON response with `204 http status code`.
+
+Example
 ```js
-//json or jsonp response
 response.noContent();
 ```
 
 ### 3xx methods
 
-#### `notModified(<view>, data, fn)`
+#### `notModified([body: Any])`
+Send JSON response with `304 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.notModified(data);
-
-//view response
-response.notModified('users',data);
-
-//text response
-response.notModified('foo bar');
+response.notModified(body);
 ```
 
 ### 4xx methods
 
-#### `badRequest(<view>, error, fn)`
+#### `badRequest([body: Any])`
+Send JSON response with `400 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.badRequest(error);
-
-//view response
-response.badRequest('users',error);
-
-//text response
-response.badRequest('foo bar');
+response.badRequest(body);
 ```
 
-#### `unauthorized(<view>, error, fn)`
+#### `unauthorized([body: Any])`
+Send JSON response with `401 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.unauthorized(error);
-
-//view response
-response.unauthorized('users',error);
-
-//text response
-response.unauthorized('foo bar');
+response.unauthorized(body);
 ```
 
-#### `paymentRequired(<view>, error, fn)`
+#### `paymentRequired([body])`
+Send JSON response with `402 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.paymentRequired(error);
-
-//view response
-response.paymentRequired('users',error);
-
-//text response
-response.paymentRequired('foo bar');
+response.paymentRequired(body);
 ```
 
-#### `forbidden(<view>, error, fn)`
+#### `forbidden([body: Any])`
+Send JSON response with `403 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.forbidden(error);
-
-//view response
-response.forbidded('users',error);
-
-//text response
-response.forbidden('foo bar');
+response.forbidden(body);
 ```
 
-#### `notFound(<view>, error, fn)`
+#### `notFound([body: Any])`
+Send JSON response with `404 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.notFound(error);
-
-//view response
-response.notFound('users',error);
-
-//text response
-response.notFound('foo bar');
+response.notFound(body);
 ```
 
-#### `methodNotAllowed(<view>, error, fn)`
+#### `methodNotAllowed([body: Any])`
+Send JSON response with `405 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.methodNotAllowed(error);
-
-//view response
-response.methodNotAllowed('users',error);
-
-//text response
-response.methodNotAllowed('foo bar');
+response.methodNotAllowed(body);
 ```
 
-#### `conflict(<view>, error, fn)`
+#### `conflict([body: Any])`
+Send JSON response with `409 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.conflict(error);
-
-//view response
-response.conflict('users',error);
-
-//text response
-response.conflict('foo bar');
+response.conflict(body);
 ```
 
 ### 5xx methods
 
-#### `internalServerError(<view>, error, fn)`
+#### `internalServerError([body: Any])`
+Send JSON response with `500 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.internalServerError(error);
-
-//view response
-response.internalServerError('users',error);
-
-//text response
-response.internalServerError('foo bar');
+response.internalServerError(body);
 ```
 
-#### `notImplemented(<view>, error, fn)`
+#### `notImplemented([body: Any])`
+Send JSON response with `501 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.notImplemented(error);
-
-//view response
-response.notImplemented('users',error);
-
-//text response
-response.notImplemented('foo bar');
+response.notImplemented(body);
 ```
 
-#### `badGateway(<view>, error, fn)`
+#### `badGateway([body: Any])`
+Send JSON response with `502 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.badGateway(error);
-
-//view response
-response.badGateway('users',error);
-
-//text response
-response.badGateway('foo bar');
+response.badGateway(body);
 ```
 
-#### `serviceUnavailable(<view>, error, fn)`
+#### `serviceUnavailable([body])`
+Send JSON response with `503 http status code`.
+
+Example
 ```js
-//json or jsonp response
-response.serviceUnavailable(error);
-
-//view response
-response.serviceUnavailable('users',error);
-
-//text response
-response.serviceUnavailable('foo bar');
+response.serviceUnavailable(body);
 ```
 
 

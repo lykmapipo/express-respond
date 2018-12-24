@@ -1,67 +1,54 @@
 'use strict';
 
-//dependencies
-const path = require('path');
+
+/* dependencies */
 const _ = require('lodash');
-const negotiate = require(path.join(__dirname, 'lib', 'negotiate'));
-const _2xx = require(path.join(__dirname, 'lib', 'responses', '2xx'));
-const _3xx = require(path.join(__dirname, 'lib', 'responses', '3xx'));
-const _4xx = require(path.join(__dirname, 'lib', 'responses', '4xx'));
-const _5xx = require(path.join(__dirname, 'lib', 'responses', '5xx'));
+const { STATUS_CODES } = require('statuses');
+
 
 /**
- * @function
- * @description common HTTP responses for expressjs
- * @param  {Object} options - valid internal configuration for express-respond
- * @param {String} options.environment - current application environment. Default 
- *                                     to `app.get('env')` of express application
- * @param {Array.<String>} options.types - accepted response content types in the 
- *                                       order of their significant. Valid types 
- *                                       are `json`, `html` and `text`. Default to
- *                                       `json`, `html` and `text`
- * @param {Array.<String>} options.defaultType - default accepted response content
- *                                             type default to `json`
- * @return {Function} - a valid expressjs middleware
+ * @function respond
+ * @name respond
+ * @description common http responses for expressjs
+ * @return {Function} a valid expressjs middleware
+ * @author lally elias <lallyelias87@mail.com>
+ * @since  1.0.0
+ * @version 0.1.0
+ * @license MIT
  * @public
+ * @example
+ * const express = require('express');
+ * const response = require('express-respond');
+ *
+ * const app = express();
+ * app.use(respond);
+ *
+ * app.get('/', (request, response) => {
+ *   response.ok({name: 'lykmapipo'});
+ * });
  */
-module.exports = function(options) {
-    //cross check options
-    options = options || {};
+function respond(request, response, next) {
 
-    //cross check accepted types
-    const hasTypes = _.isArray(options.types) && _.size(options.types) > 0;
-    options.types = hasTypes ? options.types : ['json', 'html', 'text'];
+  // map http status code to response method
+  const HTTP_STATUS_CODES = _.merge({}, STATUS_CODES);
+  _.forEach(HTTP_STATUS_CODES, function mapStatusToResponse(status, code) {
 
-    //cross check default type
-    options.defaultType = options.defaultType || 'json';
+    // prepare response method
+    const method = _.camelCase(status);
 
-    //add negotiate to options
-    options.negotiate = negotiate;
+    // extend http response with the custom response type method
+    response[method] = response[code] = function httpReply() {
+      response.status(code);
+      response.json.apply(response, arguments);
+    };
 
-    function respond(request, response, next) {
-        //cross check current application environment
-        options.environment = options.environment ||
-            (request.app && request.app.get ? request.app.get('env') : 'development');
+  });
 
-        //extend request with respond options
-        request._respond = options;
+  // continue with middleware chain
+  next();
 
-        //extend response with 2xx responses
-        _2xx(response);
+}
 
-        //extend response with 3xx responses
-        _3xx(response);
 
-        //extend response with 4xx responses
-        _4xx(response);
-
-        //extend response with 5xx responses
-        _5xx(response);
-
-        //we are done continue with middleware chain
-        next();
-    }
-
-    //export respond middleware
-    return respond;
-};
+/* export respond middleware */
+module.exports = exports = respond;
