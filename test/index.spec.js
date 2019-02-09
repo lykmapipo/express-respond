@@ -131,16 +131,26 @@ describe('respond express integration', () => {
   describe('4xx responses', () => {
 
     it('should be able to reply `badRequest`', (done) => {
+      const error = new Error('Bad Request');
+
+      const data = {
+        message: error.message,
+        statusCode: '400',
+      };
+
       app.get('/badrequest', (request, response) => {
         assertRespond(request, response);
-        response.badRequest();
+        response.badRequest(error);
       });
 
       request(app)
         .get('/badrequest')
         .set('Accept', 'application/json')
         .expect(400)
-        .end(done);
+        .end(function (error, response) {
+          expect(response.body).to.eql(data);
+          done(error, response);
+        });
     });
 
     it('should be able to reply `unauthorized`', (done) => {
