@@ -1,3 +1,9 @@
+#### 1.2.0 (2019-03-04)
+
+##### Refactors
+
+*  split respond to smaller composable functions ([7e14902f](https://github.com/lykmapipo/express-respond/commit/7e14902f906d0818de82ccfd5a9c688b89b99ff9))
+
 #### 1.1.0 (2019-03-04)
 
 ##### New Features
