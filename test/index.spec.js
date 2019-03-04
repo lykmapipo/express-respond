@@ -41,7 +41,7 @@ const assertRespond = (request, response) => {
 
 
 describe('2xx responses', () => {
-  it('should be able to reply `ok`', (done) => {
+  it('should be able to reply `ok`', done => {
     const data = faker.helpers.userCard();
 
     app.get('/', (request, response) => {
@@ -59,7 +59,7 @@ describe('2xx responses', () => {
       });
   });
 
-  it('should be able to reply `created`', (done) => {
+  it('should be able to reply `created`', done => {
     const data = faker.helpers.userCard();
 
     app.post('/', (request, response) => {
@@ -77,7 +77,7 @@ describe('2xx responses', () => {
       });
   });
 
-  it('should be able to reply `accepted`', (done) => {
+  it('should be able to reply `accepted`', done => {
 
     app.get('/accepted', (request, response) => {
       assertRespond(request, response);
@@ -91,7 +91,7 @@ describe('2xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `noContent`', (done) => {
+  it('should be able to reply `noContent`', done => {
 
     app.get('/nocontent', (request, response) => {
       assertRespond(request, response);
@@ -110,7 +110,7 @@ describe('2xx responses', () => {
 
 describe('3xx responses', () => {
 
-  it('should be able to reply `notModified`', (done) => {
+  it('should be able to reply `notModified`', done => {
 
     app.get('/notmodified', (request, response) => {
       assertRespond(request, response);
@@ -129,13 +129,8 @@ describe('3xx responses', () => {
 
 describe('4xx responses', () => {
 
-  it('should be able to reply `badRequest`', (done) => {
+  it('should be able to reply `badRequest`', done => {
     const error = new Error('Bad Request');
-
-    const data = {
-      message: error.message,
-      statusCode: '400',
-    };
 
     app.get('/badrequest', (request, response) => {
       assertRespond(request, response);
@@ -147,12 +142,16 @@ describe('4xx responses', () => {
       .set('Accept', 'application/json')
       .expect(400)
       .end(function (error, response) {
-        expect(response.body).to.eql(data);
+        expect(response.body.status).to.be.eql('400');
+        expect(response.body.code).to.be.eql('400');
+        expect(response.body.name).to.be.eql('Error');
+        expect(response.body.message).to.be.eql('Bad Request');
+        expect(response.body.description).to.be.eql('Bad Request');
         done(error, response);
       });
   });
 
-  it('should be able to reply `unauthorized`', (done) => {
+  it('should be able to reply `unauthorized`', done => {
 
     app.get('/unauthorized', (request, response) => {
       assertRespond(request, response);
@@ -166,7 +165,7 @@ describe('4xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `paymentRequired`', (done) => {
+  it('should be able to reply `paymentRequired`', done => {
 
     app.get('/paymentRequired', (request, response) => {
       assertRespond(request, response);
@@ -180,7 +179,7 @@ describe('4xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `forbidden`', (done) => {
+  it('should be able to reply `forbidden`', done => {
 
     app.get('/forbidden', (request, response) => {
       assertRespond(request, response);
@@ -194,7 +193,7 @@ describe('4xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `notFound`', (done) => {
+  it('should be able to reply `notFound`', done => {
 
     app.get('/notFound', (request, response) => {
       assertRespond(request, response);
@@ -208,7 +207,7 @@ describe('4xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `methodNotAllowed`', (done) => {
+  it('should be able to reply `methodNotAllowed`', done => {
 
     app.get('/methodNotAllowed', (request, response) => {
       assertRespond(request, response);
@@ -222,7 +221,7 @@ describe('4xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `notAcceptable`', (done) => {
+  it('should be able to reply `notAcceptable`', done => {
 
     app.get('/notAcceptable', (request, response) => {
       assertRespond(request, response);
@@ -236,7 +235,7 @@ describe('4xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `conflict`', (done) => {
+  it('should be able to reply `conflict`', done => {
 
     app.get('/conflict', (request, response) => {
       assertRespond(request, response);
@@ -255,7 +254,7 @@ describe('4xx responses', () => {
 
 describe('5xx responses', () => {
 
-  it('should be able to reply `internalServerError`', (done) => {
+  it('should be able to reply `internalServerError`', done => {
 
     app.get('/internalServerError', (request, response) => {
       assertRespond(request, response);
@@ -269,7 +268,7 @@ describe('5xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `notImplemented`', (done) => {
+  it('should be able to reply `notImplemented`', done => {
 
     app.get('/notImplemented', (request, response) => {
       assertRespond(request, response);
@@ -283,7 +282,7 @@ describe('5xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `badGateway`', (done) => {
+  it('should be able to reply `badGateway`', done => {
 
     app.get('/badGateway', (request, response) => {
       assertRespond(request, response);
@@ -298,7 +297,7 @@ describe('5xx responses', () => {
   });
 
 
-  it('should be able to reply `gatewayTimeout`', (done) => {
+  it('should be able to reply `gatewayTimeout`', done => {
 
     app.get('/gatewayTimeout', (request, response) => {
       assertRespond(request, response);
@@ -312,7 +311,7 @@ describe('5xx responses', () => {
       .end(done);
   });
 
-  it('should be able to reply `serviceUnavailable`', (done) => {
+  it('should be able to reply `serviceUnavailable`', done => {
 
     app.get('/serviceUnavailable', (request, response) => {
       assertRespond(request, response);
