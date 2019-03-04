@@ -38,9 +38,13 @@ function respond(request, response, next) {
 
     // extend http response with the custom response type method
     response[method] = response[code] = function httpReply() {
-      const body = {status: code, message: status};
       response.status(code);
-      response.json.apply(response, arguments.length > 1 ? arguments : body);
+
+      if (arguments[0] instanceof Error) {
+        response.json({ message: arguments[0].message, statusCode: code, });
+      } else {
+        response.json.apply(response, arguments);
+      }
     };
 
   });
