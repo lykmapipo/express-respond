@@ -1,3 +1,9 @@
+#### 1.2.1 (2019-03-04)
+
+##### Code Style Changes
+
+*  improve code jsdocs ([6a4addc2](https://github.com/lykmapipo/express-respond/commit/6a4addc20b91513802f170a45be64b2d496ca868))
+
 #### 1.2.0 (2019-03-04)
 
 ##### Refactors
