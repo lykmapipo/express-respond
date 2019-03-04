@@ -84,10 +84,10 @@ const prepareBody = (data, code = 500) => {
  * @function mapToHttpReply
  * @name mapToHttpReply
  * @description generate http reply method based on http status
+ * @param {Object} response valid express http response object
  * @param {String} status valid http response status message
  * @param {String} code valid http response status code
- * @see {@link https://jsonapi.org/format/#errors}
- * @return {Object} formatted error response body
+ * @param {Mixed} data http response payload
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.2.0
  * @version 0.1.0
@@ -110,10 +110,9 @@ const mapToHttpReply = (response, status, code) => data => {
  * @function mapStatusToMethod
  * @name mapStatusToMethod
  * @description map http status to named response method
+ * @param {Object} response valid express http response object
  * @param {String} status valid http response status message
  * @param {String} code valid http response status code
- * @see {@link https://jsonapi.org/format/#errors}
- * @return {Object} formatted error response body
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.2.0
  * @version 0.1.0
@@ -134,6 +133,9 @@ const mapStatusToMethod = response => (status, code) => {
  * @function respond
  * @name respond
  * @description common http responses for expressjs
+ * @param {Object} request valid express http request object
+ * @param {Object} response valid express http response object
+ * @param {Function} next a middleware to invoke for continuation
  * @return {Function} a valid expressjs middleware
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.0.0
@@ -152,7 +154,7 @@ const mapStatusToMethod = response => (status, code) => {
  * });
  */
 const respond = (request, response, next) => {
-  // map http status code to response method
+  // map http status code to http response method
   _.forEach(STATUS_CODES, mapStatusToMethod(response));
 
   // continue with middleware chain
