@@ -81,6 +81,56 @@ const prepareBody = (data, code = 500) => {
 
 
 /**
+ * @function mapToHttpReply
+ * @name mapToHttpReply
+ * @description generate http reply method based on http status
+ * @param {String} status valid http response status message
+ * @param {String} code valid http response status code
+ * @see {@link https://jsonapi.org/format/#errors}
+ * @return {Object} formatted error response body
+ * @author lally elias <lallyelias87@mail.com>
+ * @since  1.2.0
+ * @version 0.1.0
+ * @license MIT
+ * @private
+ */
+const mapToHttpReply = (response, status, code) => data => {
+  // set response status
+  response.status(code);
+
+  // prepare response body
+  const body = prepareBody(data, code);
+
+  // respond with json body
+  response.json(body);
+};
+
+
+/**
+ * @function mapStatusToMethod
+ * @name mapStatusToMethod
+ * @description map http status to named response method
+ * @param {String} status valid http response status message
+ * @param {String} code valid http response status code
+ * @see {@link https://jsonapi.org/format/#errors}
+ * @return {Object} formatted error response body
+ * @author lally elias <lallyelias87@mail.com>
+ * @since  1.2.0
+ * @version 0.1.0
+ * @license MIT
+ * @private
+ */
+const mapStatusToMethod = response => (status, code) => {
+  // prepare response method from http status messge
+  const method = _.camelCase(status);
+
+  // extend http response with the custom response type method
+  const httpReply = mapToHttpReply(response, status, code);
+  response[method] = response[code] = httpReply;
+};
+
+
+/**
  * @function respond
  * @name respond
  * @description common http responses for expressjs
@@ -101,33 +151,13 @@ const prepareBody = (data, code = 500) => {
  *   response.ok({ name: 'lykmapipo' });
  * });
  */
-function respond(request, response, next) {
-
+const respond = (request, response, next) => {
   // map http status code to response method
-  const HTTP_STATUS_CODES = _.merge({}, STATUS_CODES);
-  _.forEach(HTTP_STATUS_CODES, function mapStatusToResponse(status, code) {
-
-    // prepare response method
-    const method = _.camelCase(status);
-
-    // extend http response with the custom response type method
-    response[method] = response[code] = function httpReply(data) {
-      // set response status
-      response.status(code);
-
-      // prepare response body
-      const body = prepareBody(data, code);
-
-      // respond with json body
-      response.json(body);
-    };
-
-  });
+  _.forEach(STATUS_CODES, mapStatusToMethod(response));
 
   // continue with middleware chain
   next();
-
-}
+};
 
 
 /* export respond middleware */
