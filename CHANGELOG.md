@@ -1,3 +1,13 @@
+#### 1.3.0 (2019-04-01)
+
+##### Chores
+
+*  force latest dependencies ([e8aff63f](https://github.com/lykmapipo/express-respond/commit/e8aff63ff3cc6b32f494f72539c65f1de0954120))
+
+##### Refactors
+
+*  use map error to object to normalize error response ([04847ec1](https://github.com/lykmapipo/express-respond/commit/04847ec17ced186fd193b36e9a6783e793d5207a))
+
 #### 1.2.1 (2019-03-04)
 
 ##### Code Style Changes
