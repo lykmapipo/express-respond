@@ -3,44 +3,9 @@
 
 /* dependencies */
 const _ = require('lodash');
+const { mapErrorToObject } = require('@lykmapipo/common');
 const { isProduction } = require('@lykmapipo/env');
 const { STATUS_CODES } = require('statuses');
-
-
-/**
- * @function normalizeError
- * @name normalizeError
- * @description normalize error to common accepted error response body
- * @param {Error} error valid error instance
- * @param {String} [code=500] valid http response status code
- * @see {@link https://jsonapi.org/format/#errors}
- * @return {Object} formatted error response body
- * @author lally elias <lallyelias87@mail.com>
- * @since  1.1.0
- * @version 0.1.0
- * @license MIT
- * @private
- * @example
- * const body = normalizeError(new Error('Missing API Key'));
- * //=> { message: 'Missing API Key', ... }
- */
-const normalizeError = (error, code = 500) => {
-  // ensure error instance
-  if (!_.isError(error)) { return error; }
-
-  // prepare error payload
-  const body = {};
-  body.status = (error.status || code);
-  body.code = (error.code || code);
-  body.name = (error.name || 'Error');
-  body.message = (error.message || STATUS_CODES[code]);
-  body.description = (error.description || error.message || STATUS_CODES[code]);
-  body.errors = (error.errors || undefined); // error bag
-  body.stack = (isProduction() ? undefined : error.stack); // error stack
-
-  // return formatted error response
-  return body;
-};
 
 
 /**
@@ -72,8 +37,9 @@ const prepareBody = (data, code = 500) => {
   }
 
   // handle error or data
+  const stack = !isProduction();
   let body = {};
-  body = _.isError(data) ? normalizeError(data, code) : data;
+  body = _.isError(data) ? mapErrorToObject(data, { code, stack }) : data;
 
   // return formatted response body
   return body;
