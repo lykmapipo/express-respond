@@ -52,7 +52,7 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.15.0",
+    "@lykmapipo/common": ">=0.16.0",
     "@lykmapipo/env": ">=0.7.3",
     "@lykmapipo/include": ">=0.2.1",
     "lodash": ">=4.17.11",
