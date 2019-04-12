@@ -1,3 +1,20 @@
+#### 1.4.0 (2019-04-12)
+
+##### Chores
+
+*  force latest dependencies ([cb237c49](https://github.com/lykmapipo/express-respond/commit/cb237c49f6d0ed8e28ef0e3f29785f738d3ebf76))
+*  force latest dependencies & travis node version ([d138a55f](https://github.com/lykmapipo/express-respond/commit/d138a55fa2c2a9b55ff5b54a96a4d91c71dcedfc))
+*  force latest dependencies ([18ebdb99](https://github.com/lykmapipo/express-respond/commit/18ebdb997d831515ffb14a5d2605482c61b64722))
+
+##### Documentation Changes
+
+*  update usage docs ([5dcd012c](https://github.com/lykmapipo/express-respond/commit/5dcd012c0cb9db91734b9cd227685bc26380b152))
+*  add code of conduct & contributing guidelines ([51398c74](https://github.com/lykmapipo/express-respond/commit/51398c746f1e24ceeb024a4fa92ae40fcd9dd457))
+
+##### New Features
+
+*  add generic error response method ([27b0b9ac](https://github.com/lykmapipo/express-respond/commit/27b0b9aca13992b16e7d9f0d4afdc546636e7d8d))
+
 #### 1.3.0 (2019-04-01)
 
 ##### Chores
