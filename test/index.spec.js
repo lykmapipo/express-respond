@@ -37,6 +37,9 @@ const assertRespond = (request, response) => {
   expect(response.notImplemented).to.be.a('function');
   expect(response.badGateway).to.be.a('function');
   expect(response.serviceUnavailable).to.be.a('function');
+
+  // misc
+  expect(response.error).to.be.a('function');
 };
 
 
@@ -323,6 +326,60 @@ describe('5xx responses', () => {
       .set('Accept', 'application/json')
       .expect(503)
       .end(done);
+  });
+
+});
+
+describe('error responses', () => {
+
+  it('should be able to reply `error`', done => {
+
+    app.get('/error', (request, response) => {
+      assertRespond(request, response);
+      response.error(new Error('Internal Error'));
+    });
+
+    request(app)
+      .get('/error')
+      .set('Accept', 'application/json')
+      .expect(500)
+      .end((error, response) => {
+        const { body } = response;
+        expect(body.code).to.exist.and.be.equal(500);
+        expect(body.status).to.exist.and.be.equal(500);
+        expect(body.name).to.exist;
+        expect(body.message).to.exist
+          .and.be.equal('Internal Error');
+        expect(body.description).to.exist;
+        expect(body.stack).to.exist;
+        done();
+      });
+  });
+
+  it('should be able to reply `error`', done => {
+
+    app.get('/error-custom', (request, response) => {
+      assertRespond(request, response);
+      const error = new Error('Invalid Arguments');
+      error.status = 400;
+      response.error(error);
+    });
+
+    request(app)
+      .get('/error-custom')
+      .set('Accept', 'application/json')
+      .expect(400)
+      .end((error, response) => {
+        const { body } = response;
+        expect(body.code).to.exist.and.be.equal(400);
+        expect(body.status).to.exist.and.be.equal(400);
+        expect(body.name).to.exist;
+        expect(body.message).to.exist
+          .and.be.equal('Invalid Arguments');
+        expect(body.description).to.exist;
+        expect(body.stack).to.exist;
+        done();
+      });
   });
 
 });

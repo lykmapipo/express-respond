@@ -51,7 +51,6 @@ const prepareBody = (data, code = 500) => {
  * @name mapToHttpReply
  * @description generate http reply method based on http status
  * @param {Object} response valid express http response object
- * @param {String} status valid http response status message
  * @param {String} code valid http response status code
  * @param {Mixed} data http response payload
  * @author lally elias <lallyelias87@mail.com>
@@ -60,12 +59,15 @@ const prepareBody = (data, code = 500) => {
  * @license MIT
  * @private
  */
-const mapToHttpReply = (response, status, code) => data => {
+const mapToHttpReply = (response, code) => data => {
+  // prepare http status
+  const status = _.get(data, 'status', code);
+
   // set response status
-  response.status(code);
+  response.status(status);
 
   // prepare response body
-  const body = prepareBody(data, code);
+  const body = prepareBody(data, status);
 
   // respond with json body
   response.json(body);
@@ -90,7 +92,7 @@ const mapStatusToMethod = response => (status, code) => {
   const method = _.camelCase(status);
 
   // extend http response with the custom response type method
-  const httpReply = mapToHttpReply(response, status, code);
+  const httpReply = mapToHttpReply(response, code);
   response[method] = response[code] = httpReply;
 };
 
@@ -122,6 +124,9 @@ const mapStatusToMethod = response => (status, code) => {
 const respond = (request, response, next) => {
   // map http status code to http response method
   _.forEach(STATUS_CODES, mapStatusToMethod(response));
+
+  // add error response method
+  response.error = mapToHttpReply(response, 500);
 
   // continue with middleware chain
   next();
