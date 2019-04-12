@@ -5,8 +5,6 @@ express-respond
 
 HTTP response methods with auto content negotiation for [expressjs](https://github.com/strongloop/express/)
 
-*Note: v1.0.0 only support json response*
-
 ## Installation
 ```sh
 $ npm install --save express-respond
@@ -22,6 +20,10 @@ app.use(respond);
 
 app.get('/', (request, response) => {
   response.ok({ name: 'lykmapipo' });
+});
+
+app.use((error, request, response) => {
+  response.error(error);
 });
 ```
 
@@ -156,12 +158,22 @@ Example
 response.badGateway(body);
 ```
 
-#### `serviceUnavailable([body])`
+#### `serviceUnavailable([body: Any])`
 Send JSON response with `503 http status code`.
 
 Example
 ```js
 response.serviceUnavailable(body);
+```
+
+### Error methods
+
+#### `error([body: Error])`
+Send `error` as JSON response with `http status code` obtained from `error.status` property.
+
+Example
+```js
+response.error(error);
 ```
 
 
