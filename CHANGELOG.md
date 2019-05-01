@@ -1,3 +1,10 @@
+#### 1.4.1 (2019-05-01)
+
+##### Chores
+
+* **.npmrc:**  prevent npm version to commit and tag version ([9c63b172](https://github.com/lykmapipo/express-respond/commit/9c63b172ac5eaf62969da68964b8c8276f1dda87))
+* **deps:**  force latest version & audit fix ([fdcd6772](https://github.com/lykmapipo/express-respond/commit/fdcd67725701869f0df2bdaf605f633eada0e94e))
+
 #### 1.4.0 (2019-04-12)
 
 ##### Chores
