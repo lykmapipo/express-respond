@@ -48,13 +48,13 @@
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-mocha-test": "^0.13.3",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^6.1.3",
+    "mocha": "^6.1.4",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.16.0",
-    "@lykmapipo/env": ">=0.7.3",
-    "@lykmapipo/include": ">=0.2.1",
+    "@lykmapipo/common": ">=0.17.1",
+    "@lykmapipo/env": ">=0.7.4",
+    "@lykmapipo/include": ">=0.2.2",
     "lodash": ">=4.17.11",
     "statuses": ">=1.5.0"
   }
