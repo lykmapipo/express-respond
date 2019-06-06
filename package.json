@@ -42,7 +42,7 @@
   ],
   "devDependencies": {
     "chai": "^4.2.0",
-    "express": ">=4.17.0",
+    "express": ">=4.17.1",
     "faker": "^4.1.0",
     "grunt": "^1.0.4",
     "grunt-contrib-jshint": "^2.1.0",
@@ -52,8 +52,8 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.17.5",
-    "@lykmapipo/env": ">=0.7.7",
+    "@lykmapipo/common": ">=0.19.1",
+    "@lykmapipo/env": ">=0.7.9",
     "@lykmapipo/include": ">=0.2.4",
     "lodash": ">=4.17.11",
     "statuses": ">=1.5.0"
