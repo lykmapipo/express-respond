@@ -1,3 +1,13 @@
+#### 1.4.4 (2019-06-06)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([9d022c93](https://github.com/lykmapipo/express-respond/commit/9d022c939f6974f382e1e92b39ce09aacfc69ffa))
+
+##### Bug Fixes
+
+*  hanlde invalid status code when reponse has status object for business logics ([a544a93b](https://github.com/lykmapipo/express-respond/commit/a544a93b30d57edaecf3bc17bc449f3739e99fa4))
+
 #### 1.4.3 (2019-05-20)
 
 ##### Chores
