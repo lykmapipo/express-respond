@@ -61,7 +61,11 @@ const prepareBody = (data, code = 500) => {
  */
 const mapToHttpReply = (response, code) => data => {
   // prepare http status
-  const status = _.get(data, 'status', code);
+  let status = _.get(data, 'status', code);
+
+  // FIX: RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code
+  // FIX: if response data has status field for business logics
+  status = (_.isNumber(status) || _.isString(status)) ? status : code;
 
   // set response status
   response.status(status);
