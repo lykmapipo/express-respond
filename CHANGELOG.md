@@ -1,3 +1,13 @@
+#### 1.4.12 (2019-10-23)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([5b7b92f8](https://github.com/lykmapipo/express-respond/commit/5b7b92f8ac60dff8e78be17838a6fffc79c3df75))
+
+##### Refactors
+
+*  remove include usage ([698085f1](https://github.com/lykmapipo/express-respond/commit/698085f17c739a8f17a635bfb77a8f6b204640d5))
+
 #### 1.4.11 (2019-10-10)
 
 ##### Chores
