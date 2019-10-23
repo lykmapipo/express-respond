@@ -4,9 +4,8 @@
 // dependencies
 const faker = require('faker');
 const request = require('supertest');
-const { include } = require('@lykmapipo/include');
 const { expect } = require('chai');
-const respond = include(__dirname, '..');
+const respond = require('../');
 const app = require('express')();
 app.use(respond);
 
