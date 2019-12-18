@@ -55,8 +55,8 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.28.13",
-    "@lykmapipo/env": ">=0.15.1",
+    "@lykmapipo/common": ">=0.29.0",
+    "@lykmapipo/env": ">=0.16.0",
     "lodash": ">=4.17.15",
     "statuses": ">=1.5.0"
   }
