@@ -1,3 +1,9 @@
+#### 1.5.0 (2020-04-24)
+
+##### Refactors
+
+*  use latest http statuses ([9678b686](https://github.com/lykmapipo/express-respond/commit/9678b686835f4e79c6e4f3c21d2558494990f0d0))
+
 #### 1.4.23 (2020-04-18)
 
 ##### Chores
