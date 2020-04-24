@@ -1,6 +1,6 @@
 {
   "name": "express-respond",
-  "version": "1.4.23",
+  "version": "1.5.0",
   "description": "HTTP response methods with auto content negotiation for expressjs",
   "main": "index.js",
   "scripts": {
@@ -55,9 +55,8 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.31.0",
-    "@lykmapipo/env": ">=0.16.12",
-    "lodash": ">=4.17.15",
-    "statuses": ">=1.5.0"
+    "@lykmapipo/common": ">=0.32.0",
+    "@lykmapipo/env": ">=0.17.2",
+    "lodash": ">=4.17.15"
   }
 }

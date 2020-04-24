@@ -3,10 +3,10 @@
 
 /* dependencies */
 const _ = require('lodash');
-const { mapErrorToObject } = require('@lykmapipo/common');
+const { mapErrorToObject, STATUS_CODES } = require('@lykmapipo/common');
 const { isProduction } = require('@lykmapipo/env');
-const { STATUS_CODES } = require('statuses');
 
+// TODO: just extend response directly
 
 /**
  * @function prepareBody
@@ -70,11 +70,15 @@ const mapToHttpReply = (response, code) => data => {
   // set response status
   response.status(status);
 
+  // respond with json body
+  const ignoreBody = _.includes([204, 304], _.toNumber(status));
+  if (ignoreBody) {
+    return response.json();
+  }
+
   // prepare response body
   const body = prepareBody(data, status);
-
-  // respond with json body
-  response.json(body);
+  return response.json(body);
 };
 
 
@@ -92,7 +96,7 @@ const mapToHttpReply = (response, code) => data => {
  * @private
  */
 const mapStatusToMethod = response => (status, code) => {
-  // prepare response method from http status messge
+  // prepare response method from http status message
   const method = _.camelCase(status);
 
   // extend http response with the custom response type method
