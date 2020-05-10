@@ -50,13 +50,13 @@
     "handlebars": "^4.7.6",
     "jshint-stylish": "^2.2.1",
     "lodash.template": "^4.5.0",
-    "mocha": "^7.1.1",
-    "shelljs": "^0.8.3",
+    "mocha": "^7.1.2",
+    "shelljs": "^0.8.4",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.32.0",
-    "@lykmapipo/env": ">=0.17.2",
+    "@lykmapipo/common": ">=0.33.2",
+    "@lykmapipo/env": ">=0.17.5",
     "lodash": ">=4.17.15"
   }
 }
