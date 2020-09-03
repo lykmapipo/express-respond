@@ -1,6 +1,6 @@
 {
   "name": "express-respond",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "description": "HTTP response methods with auto content negotiation for expressjs",
   "main": "index.js",
   "scripts": {
