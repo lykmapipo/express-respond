@@ -1,7 +1,15 @@
 express-respond
 =====================
 
-[![Build Status](https://travis-ci.org/lykmapipo/express-respond.svg?branch=master)](https://travis-ci.org/lykmapipo/express-respond)
+[![Build Status](https://travis-ci.com/lykmapipo/express-respond.svg?branch=master)](https://travis-ci.com/lykmapipo/express-respond)
+[![Dependencies Status](https://david-dm.org/lykmapipo/express-respond.svg)](https://david-dm.org/lykmapipo/express-respond)
+[![Coverage Status](https://coveralls.io/repos/github/lykmapipo/express-respond/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/express-respond?branch=master)
+[![GitHub License](https://img.shields.io/github/license/lykmapipo/express-respond)](https://github.com/lykmapipo/express-respond/blob/master/LICENSE)
+
+[![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
+[![npm version](https://img.shields.io/npm/v/express-respond)](https://www.npmjs.com/package/express-respond)
 
 HTTP response methods with auto content negotiation for [expressjs](https://github.com/strongloop/express/)
 
@@ -12,17 +20,19 @@ $ npm install --save express-respond
 
 ## Usage
 ```js
-const express = require('express');
-const respond = require('express-respond');
+import express from 'express';
+import respond from 'express-respond';
 
 const app = express();
 app.use(respond);
 
+// respond with 200
 app.get('/', (request, response) => {
   response.ok({ name: 'lykmapipo' });
 });
 
-app.use((error, request, response) => {
+// respond with error
+app.use((error, request, response, next) => {
   response.error(error);
 });
 ```
@@ -201,7 +211,7 @@ Do not forget to add a bit of test(s) of what value you adding.
 
 The MIT License (MIT)
 
-Copyright (c) 2015 lykmapipo & Contributors
+Copyright (c) lykmapipo & Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

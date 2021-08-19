@@ -1,10 +1,6 @@
-'use strict';
-
-
-/* dependencies */
-const _ = require('lodash');
-const { mapErrorToObject, STATUS_CODES } = require('@lykmapipo/common');
-const { isProduction } = require('@lykmapipo/env');
+import _ from 'lodash';
+import { mapErrorToObject, STATUS_CODES } from '@lykmapipo/common';
+import { isProduction } from '@lykmapipo/env';
 
 // TODO: just extend response directly
 
@@ -12,9 +8,9 @@ const { isProduction } = require('@lykmapipo/env');
  * @function prepareBody
  * @name prepareBody
  * @description prepare response body
- * @param {Mixed} [data] valid response body
- * @param {String} [code=500] valid http response status code
- * @return {Object} formatted response body
+ * @param {*} [data] valid response body
+ * @param {string} [code=500] valid http response status code
+ * @returns {object} formatted response body
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.1.0
  * @version 0.1.0
@@ -45,27 +41,26 @@ const prepareBody = (data, code = 500) => {
   return body;
 };
 
-
 /**
  * @function mapToHttpReply
  * @name mapToHttpReply
  * @description generate http reply method based on http status
- * @param {Object} response valid express http response object
- * @param {String} code valid http response status code
- * @param {Mixed} data http response payload
+ * @param {object} response valid express http response object
+ * @param {string} code valid http response status code
+ * @returns {Function} a valid response function helper
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.2.0
  * @version 0.1.0
  * @license MIT
  * @private
  */
-const mapToHttpReply = (response, code) => data => {
+const mapToHttpReply = (response, code) => (data) => {
   // prepare http status
   let status = _.get(data, 'status', code);
 
   // FIX: RangeError [ERR_HTTP_INVALID_STATUS_CODE]: Invalid status code
   // FIX: if response data has status field for business logics
-  status = (_.isNumber(status) || _.isString(status)) ? status : code;
+  status = _.isNumber(status) || _.isString(status) ? status : code;
 
   // set response status
   response.status(status);
@@ -81,38 +76,36 @@ const mapToHttpReply = (response, code) => data => {
   return response.json(body);
 };
 
-
 /**
  * @function mapStatusToMethod
  * @name mapStatusToMethod
  * @description map http status to named response method
- * @param {Object} response valid express http response object
- * @param {String} status valid http response status message
- * @param {String} code valid http response status code
+ * @param {object} response valid express http response object
+ * @returns {Function} a valid response function helper
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.2.0
  * @version 0.1.0
  * @license MIT
  * @private
  */
-const mapStatusToMethod = response => (status, code) => {
+const mapStatusToMethod = (response) => (status, code) => {
   // prepare response method from http status message
   const method = _.camelCase(status);
 
   // extend http response with the custom response type method
   const httpReply = mapToHttpReply(response, code);
-  response[method] = response[code] = httpReply;
+  response[code] = httpReply;
+  response[method] = httpReply;
 };
-
 
 /**
  * @function respond
  * @name respond
  * @description common http responses for expressjs
- * @param {Object} request valid express http request object
- * @param {Object} response valid express http response object
+ * @param {object} request valid express http request object
+ * @param {object} response valid express http response object
  * @param {Function} next a middleware to invoke for continuation
- * @return {Function} a valid expressjs middleware
+ * @returns {Function} a valid expressjs middleware
  * @author lally elias <lallyelias87@mail.com>
  * @since  1.0.0
  * @version 0.1.0
@@ -137,9 +130,8 @@ const respond = (request, response, next) => {
   response.error = mapToHttpReply(response, 500);
 
   // continue with middleware chain
-  next();
+  return next();
 };
 
-
 /* export respond middleware */
-module.exports = exports = respond;
+export default respond;
