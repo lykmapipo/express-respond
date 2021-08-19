@@ -1,3 +1,9 @@
+#### 1.6.0 (2021-08-19)
+
+##### Refactors
+
+*  migrate to es6 ([fcb5f0da](https://github.com/lykmapipo/express-respond/commit/fcb5f0daca3a4690850cd98eb0df3940629a3819))
+
 #### 1.5.15 (2021-02-16)
 
 ##### Chores
