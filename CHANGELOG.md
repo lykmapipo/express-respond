@@ -1,3 +1,9 @@
+#### 1.6.1 (2021-08-23)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([4f35514a](https://github.com/lykmapipo/express-respond/commit/4f35514a55e80064c235947f711efd4abf2d19a1))
+
 #### 1.6.0 (2021-08-19)
 
 ##### Refactors
