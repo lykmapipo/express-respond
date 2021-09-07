@@ -1,7 +1,7 @@
 express-respond
 =====================
 
-[![Build Status](https://travis-ci.com/lykmapipo/express-respond.svg?branch=master)](https://travis-ci.com/lykmapipo/express-respond)
+[![Build Status](https://app.travis-ci.com/lykmapipo/express-respond.svg?branch=master)](https://app.travis-ci.com/lykmapipo/express-respond)
 [![Dependencies Status](https://david-dm.org/lykmapipo/express-respond.svg)](https://david-dm.org/lykmapipo/express-respond)
 [![Coverage Status](https://coveralls.io/repos/github/lykmapipo/express-respond/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/express-respond?branch=master)
 [![GitHub License](https://img.shields.io/github/license/lykmapipo/express-respond)](https://github.com/lykmapipo/express-respond/blob/master/LICENSE)
